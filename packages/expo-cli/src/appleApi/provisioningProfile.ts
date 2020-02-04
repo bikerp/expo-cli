@@ -1,3 +1,4 @@
+import assert from 'assert';
 import plist, { PlistObject } from 'plist';
 import { runAction, travelingFastlane } from './fastlane';
 import { AppleCtx } from './authenticate';
@@ -12,7 +13,7 @@ export type ProvisioningProfileInfo = {
 } & ProvisioningProfile;
 
 export type ProvisioningProfile = {
-  provisioningProfileId: string;
+  provisioningProfileId?: string;
   provisioningProfile: string;
 };
 
@@ -27,6 +28,9 @@ export class ProvisioningProfileManager {
     provisioningProfile: ProvisioningProfile,
     distCert: T
   ): Promise<ProvisioningProfile> {
+    if (!provisioningProfile.provisioningProfileId) {
+      throw new Error('Provisioning profile: cannot use existing profile, insufficient id');
+    }
     const args = [
       'use-existing',
       this.ctx.appleId,
