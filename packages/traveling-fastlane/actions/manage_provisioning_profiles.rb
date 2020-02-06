@@ -12,15 +12,9 @@ def find_dist_cert(dist_cert_serial, is_enterprise)
   ? Spaceship::Portal.certificate.in_house.all \
   : Spaceship::Portal.certificate.production.all
 
-  cert = nil
-  if dist_cert_serial == '__last__'
-    cert = certs.last
-  else
-    cert = certs.find do |c|
-      c.raw_data['serialNum'] == dist_cert_serial
-    end
+  certs.find do |c|
+    c.raw_data['serialNum'] == dist_cert_serial
   end
-  cert
 end
 
 def create(cert, profile_name)
