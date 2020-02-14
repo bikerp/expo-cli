@@ -520,6 +520,11 @@ export type WebPlatformConfig = {
    * Configuration for PWA splash screens.
    */
   splash?: WebSplashScreen;
+
+  /**
+   * [Firebase Configuration File](https://support.google.com/firebase/answer/7015592) Firebase web configuration.
+   */
+  googleServicesFile?: string;
 };
 
 /**

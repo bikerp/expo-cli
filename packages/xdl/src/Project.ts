@@ -283,6 +283,13 @@ async function _resolveGoogleServicesFile(projectRoot: string, manifest: ExpoCon
     );
     manifest.ios.googleServicesFile = contents;
   }
+  if (manifest.web && manifest.web.googleServicesFile) {
+    const contents = await fs.readFile(
+      path.resolve(projectRoot, manifest.web.googleServicesFile),
+      'utf8'
+    );
+    manifest.web.googleServicesFile = contents;
+  }
 }
 
 async function _resolveManifestAssets(
